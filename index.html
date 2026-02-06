@@ -1,50 +1,421 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Emily Rios – UX Designer</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    body {
-      font-family: system-ui, sans-serif;
-      margin: 0;
-      padding: 3rem;
-      max-width: 900px;
-      margin: auto;
-      line-height: 1.6;
-      color: #111;
-    }
-    h1, h2 { line-height: 1.2; }
-    a { color: #000; text-decoration: underline; }
-    section { margin-bottom: 3rem; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emily Rios | UX Designer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #2c3e50;
+            background-color: #fafafa;
+        }
+
+        /* Navigation */
+        nav {
+            background-color: #4e6e36;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        nav .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav .logo {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+
+        nav a:hover {
+            opacity: 0.8;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #4e6e36 0%, #6a8f4a 100%);
+            color: white;
+            padding: 6rem 2rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero .subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            opacity: 0.95;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Section Styling */
+        section {
+            padding: 4rem 2rem;
+        }
+
+        section h2 {
+            font-size: 2.5rem;
+            color: #4e6e36;
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        /* About Section */
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        .about-content p {
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-top: 2rem;
+        }
+
+        .skill-tag {
+            background-color: #e8f0e1;
+            color: #4e6e36;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            border: 2px solid #4e6e36;
+        }
+
+        /* Projects Grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+            margin-top: 2rem;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 24px rgba(78, 110, 54, 0.2);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(135deg, #e8f0e1 0%, #c9dbb8 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: #4e6e36;
+        }
+
+        .project-content {
+            padding: 1.8rem;
+        }
+
+        .project-content h3 {
+            color: #4e6e36;
+            margin-bottom: 0.8rem;
+            font-size: 1.5rem;
+        }
+
+        .project-content p {
+            color: #555;
+            margin-bottom: 1rem;
+            line-height: 1.7;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .tag {
+            background-color: #f0f4ec;
+            color: #4e6e36;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.85rem;
+        }
+
+        .view-project {
+            display: inline-block;
+            color: #4e6e36;
+            text-decoration: none;
+            font-weight: 600;
+            border-bottom: 2px solid #4e6e36;
+            transition: opacity 0.3s;
+        }
+
+        .view-project:hover {
+            opacity: 0.7;
+        }
+
+        /* Contact Section */
+        .contact {
+            background: linear-gradient(135deg, #4e6e36 0%, #6a8f4a 100%);
+            color: white;
+        }
+
+        .contact h2 {
+            color: white;
+        }
+
+        .contact-content {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .contact-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-link {
+            background: white;
+            color: #4e6e36;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .contact-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        /* Footer */
+        footer {
+            background-color: #2c3e2a;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero .subtitle {
+                font-size: 1.1rem;
+            }
+
+            nav ul {
+                gap: 1rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            section h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
 </head>
 <body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <div class="logo">Emily Rios</div>
+            <ul>
+                <li><a href="#about">About</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
 
-<h1>Emily Rios</h1>
-<p><strong>UX / UI Designer</strong></p>
+    <!-- Hero Section -->
+    <header class="hero">
+        <h1>Emily Rios</h1>
+        <p class="subtitle">UX Designer & Problem Solver</p>
+        <p>Crafting intuitive digital experiences at the intersection of technology and fiber arts</p>
+    </header>
 
-<section>
-  <h2>About</h2>
-  <p>
-    I’m a UX designer with a background in Information Technology, focused on
-    building intuitive, user-centered digital experiences.
-  </p>
-</section>
+    <!-- About Section -->
+    <section id="about">
+        <div class="container">
+            <h2>About Me</h2>
+            <div class="about-content">
+                <p>Hi! I'm Emily, a UX designer based in Port Saint Lucie, Florida. Currently pursuing my Bachelor's in Information Technology at Indian River State College, I combine technical expertise with a passion for creating user-centered designs.</p>
+                
+                <p>My background in customer service and technical support has given me a unique perspective on understanding user needs and pain points. I've helped over 300+ customers navigate complex technical challenges, which has shaped my empathetic approach to design.</p>
+                
+                <p>I'm particularly interested in designing digital tools and experiences for the fiber arts community—bringing together my love for crochet, knitting, and thoughtful UX design.</p>
 
-<section>
-  <h2>Case Studies</h2>
-  <ul>
-    <li><strong>Student Portal Redesign</strong> — improving navigation and task completion</li>
-    <li><strong>Mental Health App Onboarding</strong> — reducing friction for new users</li>
-    <li><strong>E-commerce Checkout Fix</strong> — minimizing abandonment</li>
-  </ul>
-</section>
+                <div class="skills-list">
+                    <span class="skill-tag">User Research</span>
+                    <span class="skill-tag">Wireframing</span>
+                    <span class="skill-tag">Prototyping</span>
+                    <span class="skill-tag">Python</span>
+                    <span class="skill-tag">Database Management</span>
+                    <span class="skill-tag">Microsoft Office</span>
+                    <span class="skill-tag">Customer-Centric Design</span>
+                    <span class="skill-tag">Problem Solving</span>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<section>
-  <h2>Contact</h2>
-  <p>Email: <a href="mailto:emilynrios@email.com">emilynrios@email.com</a></p>
-</section>
+    <!-- Projects Section -->
+    <section id="projects">
+        <div class="container">
+            <h2>Featured Projects</h2>
+            <div class="projects-grid">
+                <!-- Project 1 -->
+                <div class="project-card">
+                    <div class="project-image">🧶</div>
+                    <div class="project-content">
+                        <h3>StitchTracker App</h3>
+                        <p>A mobile app designed to help crochet and knitting enthusiasts track their projects, manage yarn inventory, and discover new patterns. Focused on simplifying the creative process for makers of all skill levels.</p>
+                        <div class="project-tags">
+                            <span class="tag">Mobile Design</span>
+                            <span class="tag">User Research</span>
+                            <span class="tag">Prototyping</span>
+                        </div>
+                        <a href="#" class="view-project">View Case Study →</a>
+                    </div>
+                </div>
 
+                <!-- Project 2 -->
+                <div class="project-card">
+                    <div class="project-image">📐</div>
+                    <div class="project-content">
+                        <h3>Pattern Designer Tool</h3>
+                        <p>An interactive web-based tool that allows fiber artists to create, customize, and share crochet and knitting patterns. Redesigned the pattern creation flow to reduce complexity by 40%.</p>
+                        <div class="project-tags">
+                            <span class="tag">Web Design</span>
+                            <span class="tag">UI/UX</span>
+                            <span class="tag">Interaction Design</span>
+                        </div>
+                        <a href="#" class="view-project">View Case Study →</a>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="project-card">
+                    <div class="project-image">🎨</div>
+                    <div class="project-content">
+                        <h3>Yarn Color Palette Generator</h3>
+                        <p>A digital tool that helps crafters visualize yarn color combinations before purchasing. Uses AI to suggest harmonious color schemes based on uploaded inspiration images.</p>
+                        <div class="project-tags">
+                            <span class="tag">Visual Design</span>
+                            <span class="tag">User Testing</span>
+                            <span class="tag">Accessibility</span>
+                        </div>
+                        <a href="#" class="view-project">View Case Study →</a>
+                    </div>
+                </div>
+
+                <!-- Project 4 -->
+                <div class="project-card">
+                    <div class="project-image">👥</div>
+                    <div class="project-content">
+                        <h3>Crafters Community Platform</h3>
+                        <p>A social platform redesign focused on connecting fiber artists, sharing works-in-progress, and facilitating pattern exchanges. Improved user engagement by creating intuitive community features.</p>
+                        <div class="project-tags">
+                            <span class="tag">Social Design</span>
+                            <span class="tag">Information Architecture</span>
+                            <span class="tag">Wireframing</span>
+                        </div>
+                        <a href="#" class="view-project">View Case Study →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2>Let's Connect</h2>
+            <div class="contact-content">
+                <p>I'm always open to new opportunities and collaborations. Let's create something beautiful together!</p>
+                <div class="contact-links">
+                    <a href="mailto:emilynrios@icloud.com" class="contact-link">📧 Email Me</a>
+                    <a href="tel:7722036706" class="contact-link">📞 Call Me</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Emily Rios. Designed with care and creativity.</p>
+    </footer>
 </body>
 </html>
