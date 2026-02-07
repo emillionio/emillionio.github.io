@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Emily Rios | UX Designer</title>
+    <title>Emily Rios | Aspiring UX Designer</title>
     <style>
         * {
             margin: 0;
@@ -15,7 +15,7 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
             color: #2c3e50;
-            background-color: #fafafa;
+            background-color: #dff5c9;
         }
 
         /* Navigation */
@@ -232,15 +232,18 @@
 
         .view-project {
             display: inline-block;
-            color: #4e6e36;
+            background-color: #4e6e36;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
             text-decoration: none;
             font-weight: 600;
-            border-bottom: 2px solid #4e6e36;
-            transition: opacity 0.3s;
+            transition: background-color 0.3s, transform 0.3s;
         }
 
         .view-project:hover {
-            opacity: 0.7;
+            background-color: #3a5228;
+            transform: translateY(-2px);
         }
 
         /* Contact Section */
@@ -411,6 +414,11 @@
             const animatedElements = document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right, .scale-in');
             animatedElements.forEach(el => observer.observe(el));
         });
+
+        // Placeholder alert for case studies
+        function showPlaceholder() {
+            alert('Oops! These are just placeholders for now while this site is under construction.\n\nReal case studies coming soon! :)');
+        }
     </script>
     <!-- Navigation -->
     <nav>
@@ -440,11 +448,11 @@
                 <img src="profile.jpg" alt="Emily Rios" class="profile-photo">
                 
                 <div class="about-text">
-                    <p>Hi! I'm Emily, a UX designer based in Port Saint Lucie, Florida. Currently pursuing my Bachelor's in Information Technology at Indian River State College, I combine technical expertise with a passion for creating user-centered designs.</p>
+                    <p>Nice to meet you. I'm Emily, an aspiring UX designer based in South Florida. Currently pursuing my Bachelor's in Information Technology at Indian River State College, I'm striving to combine my technical expertise with my passion for creating eye-catching designs.</p>
                     
-                    <p>My background in customer service and technical support has given me a unique perspective on understanding user needs and pain points. I've helped over 300+ customers navigate complex technical challenges, which has shaped my empathetic approach to design.</p>
+                    <p>My background in customer service roles and technical support has given me a unique perspective on understanding user needs and pain points. I've helped over 2000+ customers navigate complex technical challenges within my standing career, which has shaped my empathetic approach to design.</p>
                     
-                    <p>I'm particularly interested in designing digital tools and experiences for the fiber arts community—bringing together my love for crochet, knitting, and thoughtful UX design.</p>
+                    <p>I'm particularly interested in designing digital tools and experiences for the fiber arts community, bringing together my love for crochet, knitting, and thoughtful UX design altogether.</p>
 
                     <div class="skills-list">
                         <span class="skill-tag">User Research</span>
@@ -477,7 +485,7 @@
                             <span class="tag">User Research</span>
                             <span class="tag">Prototyping</span>
                         </div>
-                        <a href="#" class="view-project">View Case Study →</a>
+                        <a href="javascript:void(0)" onclick="showPlaceholder()" class="view-project">View Case Study</a>
                     </div>
                 </div>
 
@@ -486,13 +494,13 @@
                     <div class="project-image">📐</div>
                     <div class="project-content">
                         <h3>Pattern Designer Tool</h3>
-                        <p>An interactive web-based tool that allows fiber artists to create, customize, and share crochet and knitting patterns. Redesigned the pattern creation flow to reduce complexity by 40%.</p>
+                        <p>An interactive web-based tool that allows fiber artists to create, customize, and share crochet and knitting patterns. </p>
                         <div class="project-tags">
                             <span class="tag">Web Design</span>
                             <span class="tag">UI/UX</span>
                             <span class="tag">Interaction Design</span>
                         </div>
-                        <a href="#" class="view-project">View Case Study →</a>
+                        <a href="javascript:void(0)" onclick="showPlaceholder()" class="view-project">View Case Study</a>
                     </div>
                 </div>
 
@@ -507,7 +515,7 @@
                             <span class="tag">User Testing</span>
                             <span class="tag">Accessibility</span>
                         </div>
-                        <a href="#" class="view-project">View Case Study →</a>
+                        <a href="javascript:void(0)" onclick="showPlaceholder()" class="view-project">View Case Study</a>
                     </div>
                 </div>
 
@@ -516,13 +524,13 @@
                     <div class="project-image">👥</div>
                     <div class="project-content">
                         <h3>Crafters Community Platform</h3>
-                        <p>A social platform redesign focused on connecting fiber artists, sharing works-in-progress, and facilitating pattern exchanges. Improved user engagement by creating intuitive community features.</p>
+                        <p>A social platform redesign focused on connecting fiber artists, sharing works-in-progress, and facilitating pattern exchanges. </p>
                         <div class="project-tags">
                             <span class="tag">Social Design</span>
                             <span class="tag">Information Architecture</span>
                             <span class="tag">Wireframing</span>
                         </div>
-                        <a href="#" class="view-project">View Case Study →</a>
+                        <a href="javascript:void(0)" onclick="showPlaceholder()" class="view-project">View Case Study</a>
                     </div>
                 </div>
             </div>
@@ -534,7 +542,7 @@
         <div class="container">
             <h2 class="fade-in">Let's Connect</h2>
             <div class="contact-content fade-in">
-                <p>I'm always open to new opportunities and collaborations. Let's create something beautiful together!</p>
+                <p>I'm always open to new learning opportunities and collaborations. Let's create something beautiful together!</p>
                 <div class="contact-links">
                     <a href="mailto:emilynrios@icloud.com" class="contact-link">📧 Email Me</a>
                     <a href="tel:7722036706" class="contact-link">📞 Call Me</a>
