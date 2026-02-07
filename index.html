@@ -106,15 +106,47 @@
 
         /* About Section */
         .about-content {
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
             background: white;
             padding: 2.5rem;
             border-radius: 12px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            display: flex;
+            gap: 2.5rem;
+            align-items: flex-start;
         }
 
-        .about-content p {
+        .profile-photo {
+            flex-shrink: 0;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #4e6e36;
+            box-shadow: 0 4px 12px rgba(78, 110, 54, 0.2);
+        }
+
+        .profile-photo-placeholder {
+            flex-shrink: 0;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #4e6e36 0%, #6a8f4a 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: white;
+            border: 4px solid #4e6e36;
+            box-shadow: 0 4px 12px rgba(78, 110, 54, 0.2);
+        }
+
+        .about-text {
+            flex: 1;
+        }
+
+        .about-text p {
             margin-bottom: 1rem;
             font-size: 1.1rem;
         }
@@ -262,6 +294,62 @@
             padding: 2rem;
         }
 
+        /* Scroll Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .slide-in-left {
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .slide-in-left.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .slide-in-right {
+            opacity: 0;
+            transform: translateX(50px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .slide-in-right.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .scale-in {
+            opacity: 0;
+            transform: scale(0.9);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .scale-in.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* Stagger animation delays for project cards */
+        .project-card:nth-child(1) { transition-delay: 0.1s; }
+        .project-card:nth-child(2) { transition-delay: 0.2s; }
+        .project-card:nth-child(3) { transition-delay: 0.3s; }
+        .project-card:nth-child(4) { transition-delay: 0.4s; }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
         /* Responsive Design */
         @media (max-width: 768px) {
             .hero h1 {
@@ -283,10 +371,47 @@
             section h2 {
                 font-size: 2rem;
             }
+
+            .about-content {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .profile-photo,
+            .profile-photo-placeholder {
+                width: 150px;
+                height: 150px;
+            }
+
+            .skills-list {
+                justify-content: center;
+            }
         }
     </style>
 </head>
 <body>
+    <script>
+        // Intersection Observer for scroll animations
+        document.addEventListener('DOMContentLoaded', function() {
+            const observerOptions = {
+                threshold: 0.15,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, observerOptions);
+
+            // Observe all elements with animation classes
+            const animatedElements = document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right, .scale-in');
+            animatedElements.forEach(el => observer.observe(el));
+        });
+    </script>
     <!-- Navigation -->
     <nav>
         <div class="container">
@@ -309,23 +434,28 @@
     <!-- About Section -->
     <section id="about">
         <div class="container">
-            <h2>About Me</h2>
-            <div class="about-content">
-                <p>Hi! I'm Emily, a UX designer based in Port Saint Lucie, Florida. Currently pursuing my Bachelor's in Information Technology at Indian River State College, I combine technical expertise with a passion for creating user-centered designs.</p>
+            <h2 class="fade-in">About Me</h2>
+            <div class="about-content scale-in">
+                <!-- Profile Photo -->
+                <img src="profile.jpg" alt="Emily Rios" class="profile-photo">
                 
-                <p>My background in customer service and technical support has given me a unique perspective on understanding user needs and pain points. I've helped over 300+ customers navigate complex technical challenges, which has shaped my empathetic approach to design.</p>
-                
-                <p>I'm particularly interested in designing digital tools and experiences for the fiber arts community—bringing together my love for crochet, knitting, and thoughtful UX design.</p>
+                <div class="about-text">
+                    <p>Hi! I'm Emily, a UX designer based in Port Saint Lucie, Florida. Currently pursuing my Bachelor's in Information Technology at Indian River State College, I combine technical expertise with a passion for creating user-centered designs.</p>
+                    
+                    <p>My background in customer service and technical support has given me a unique perspective on understanding user needs and pain points. I've helped over 300+ customers navigate complex technical challenges, which has shaped my empathetic approach to design.</p>
+                    
+                    <p>I'm particularly interested in designing digital tools and experiences for the fiber arts community—bringing together my love for crochet, knitting, and thoughtful UX design.</p>
 
-                <div class="skills-list">
-                    <span class="skill-tag">User Research</span>
-                    <span class="skill-tag">Wireframing</span>
-                    <span class="skill-tag">Prototyping</span>
-                    <span class="skill-tag">Python</span>
-                    <span class="skill-tag">Database Management</span>
-                    <span class="skill-tag">Microsoft Office</span>
-                    <span class="skill-tag">Customer-Centric Design</span>
-                    <span class="skill-tag">Problem Solving</span>
+                    <div class="skills-list">
+                        <span class="skill-tag">User Research</span>
+                        <span class="skill-tag">Wireframing</span>
+                        <span class="skill-tag">Prototyping</span>
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">Database Management</span>
+                        <span class="skill-tag">Microsoft Office</span>
+                        <span class="skill-tag">Customer-Centric Design</span>
+                        <span class="skill-tag">Problem Solving</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -334,10 +464,10 @@
     <!-- Projects Section -->
     <section id="projects">
         <div class="container">
-            <h2>Featured Projects</h2>
+            <h2 class="fade-in">Featured Projects</h2>
             <div class="projects-grid">
                 <!-- Project 1 -->
-                <div class="project-card">
+                <div class="project-card scale-in">
                     <div class="project-image">🧶</div>
                     <div class="project-content">
                         <h3>StitchTracker App</h3>
@@ -352,7 +482,7 @@
                 </div>
 
                 <!-- Project 2 -->
-                <div class="project-card">
+                <div class="project-card scale-in">
                     <div class="project-image">📐</div>
                     <div class="project-content">
                         <h3>Pattern Designer Tool</h3>
@@ -367,7 +497,7 @@
                 </div>
 
                 <!-- Project 3 -->
-                <div class="project-card">
+                <div class="project-card scale-in">
                     <div class="project-image">🎨</div>
                     <div class="project-content">
                         <h3>Yarn Color Palette Generator</h3>
@@ -382,7 +512,7 @@
                 </div>
 
                 <!-- Project 4 -->
-                <div class="project-card">
+                <div class="project-card scale-in">
                     <div class="project-image">👥</div>
                     <div class="project-content">
                         <h3>Crafters Community Platform</h3>
@@ -402,12 +532,13 @@
     <!-- Contact Section -->
     <section id="contact" class="contact">
         <div class="container">
-            <h2>Let's Connect</h2>
-            <div class="contact-content">
+            <h2 class="fade-in">Let's Connect</h2>
+            <div class="contact-content fade-in">
                 <p>I'm always open to new opportunities and collaborations. Let's create something beautiful together!</p>
                 <div class="contact-links">
                     <a href="mailto:emilynrios@icloud.com" class="contact-link">📧 Email Me</a>
                     <a href="tel:7722036706" class="contact-link">📞 Call Me</a>
+                    <a href="https://www.linkedin.com/in/emilynrios/" target="_blank" class="contact-link">💼 LinkedIn</a>
                 </div>
             </div>
         </div>
