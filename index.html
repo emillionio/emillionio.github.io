@@ -3,159 +3,218 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Emily Rios | UX Designer</title>
+  <title>Emily Rios — UX Designer</title>
+  <meta name="description" content="Emily Rios — aspiring UX designer crafting intuitive digital experiences at the intersection of technology and fiber arts.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:ital,wght@0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+  <a href="#top" class="skip-link">Skip to content</a>
+
+  <!-- Animated celestial ASCII atlas — decorative, sits behind all content -->
+  <pre id="sky" class="sky" aria-hidden="true"></pre>
+  <div class="paper-grain" aria-hidden="true"></div>
+
   <!-- Navigation -->
   <nav id="nav">
     <div class="nav-inner">
-      <span class="nav-logo">Emily Rios</span>
+      <a href="#top" class="nav-logo">EMILY&nbsp;RIOS<span class="dot">✶</span></a>
       <ul class="nav-links">
-        <li><a href="#about">About</a></li>
-        <li><a href="#projects">Work</a></li>
-        <li><a href="#contact">Contact</a></li>
+        <li><a href="#about">ABOUT</a></li>
+        <li><a href="#work">WORK</a></li>
+        <li><a href="#contact">CONTACT</a></li>
       </ul>
+      <a href="#contact" class="pill-cta">LET'S TALK</a>
     </div>
   </nav>
 
-  <!-- Hero — Dark Immersive Frame -->
-  <section class="hero">
+  <!-- ───────────── Hero ───────────── -->
+  <header id="top" class="hero">
     <div class="hero-inner">
-      <p class="hero-eyebrow">UX Designer &amp; Problem Solver</p>
+      <p class="kicker"><span class="signal"></span>UX DESIGNER · PYTHON DEVELOPER · FL</p>
       <h1 class="hero-title">Emily<br>Rios</h1>
-      <p class="hero-sub">Crafting intuitive digital experiences at the intersection of technology and fiber arts</p>
+      <p class="hero-serif">Designing at the intersection of <em>technology &amp; fiber arts.</em></p>
+      <p class="hero-sub">Crafting intuitive, human-centered digital experiences — from first wireframe to final pixel.</p>
+      <div class="hero-actions">
+        <a href="#work" class="btn btn--filled">VIEW WORK</a>
+        <a href="#contact" class="btn btn--ghost">GET IN TOUCH</a>
+      </div>
     </div>
-    <div class="scroll-indicator" aria-hidden="true">
-      <svg viewBox="0 0 90 90" width="90" height="90">
-        <defs>
-          <path id="c" d="M 45,45 m -32,0 a 32,32 0 1,1 64,0 a 32,32 0 1,1 -64,0"/>
-        </defs>
-        <text fill="#ffffff" font-size="9" font-family="system-ui" letter-spacing="3.8">
-          <textPath href="#c">SCROLL TO EXPLORE · SCROLL TO EXPLORE ·</textPath>
-        </text>
-      </svg>
+
+    <div class="scroll-cue" aria-hidden="true">
+      <span>SCROLL</span>
+      <span class="scroll-line"></span>
+    </div>
+  </header>
+
+  <!-- ───────────── About ───────────── -->
+  <main>
+  <section id="about" class="section">
+    <div class="container">
+      <div class="sec-head reveal">
+        <span class="counter-label">ABOUT</span>
+      </div>
+
+      <div class="about-grid">
+        <div class="about-display">
+          <h2 class="display-xl reveal-clip">UX designer &amp; developer<span class="accent">.</span></h2>
+        </div>
+
+        <div class="about-col reveal-img">
+          <div class="about-media">
+            <img src="profile.jpg" alt="Portrait of Emily Rios" class="profile-photo">
+            <div class="media-tag"><span class="signal"></span>EMILY_RIOS.jpg</div>
+          </div>
+          <div class="skills-block">
+            <span class="skills-label">SKILLS</span>
+            <ul class="skills">
+              <li class="skill">Python</li>
+              <li class="skill">Git</li>
+              <li class="skill">Automation</li>
+              <li class="skill">APIs</li>
+              <li class="skill">Figma</li>
+              <li class="skill">Wireframing</li>
+              <li class="skill">Prototyping</li>
+              <li class="skill">Research</li>
+              <li class="skill">Usability</li>
+              <li class="skill">Docker</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="about-body reveal">
+          <p>I'm a UX designer and Python developer based in Port Saint Lucie, Florida — Google UX Design certified, pursuing a <strong>B.S. in Information Technology</strong> and a CompTIA A+.</p>
+          <p>At <strong>Advantage Software</strong> I engineer and maintain <strong>15+ Python plugins</strong> and workflow-automation tools for Eclipse CAT software, and I drove a <strong>Speechmatics ASR integration</strong> — building the configuration and dictionary pipelines for real-time speech recognition. I work across REST APIs and plugin architecture, Windows internals and network troubleshooting, and enterprise imaging with custom PC builds.</p>
+          <p>As a senior technical consultant for <strong>Apple</strong>, I diagnosed hardware and software issues across <strong>300+ products</strong>, surfacing recurring trends from 50+ daily cases to inform product-improvement recommendations.</p>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- About — White Editorial Section -->
-  <section id="about" class="section section--light">
+  <!-- ───────────── Work ───────────── -->
+  <section id="work" class="section">
     <div class="container">
-      <div class="about-layout">
-        <div>
-          <span class="label-text">About</span>
-        </div>
-        <div>
-          <h2 class="heading-display">Aspiring UX<br>Designer</h2>
-          <div class="about-body">
-            <img src="profile.jpg" alt="Emily Rios" class="profile-photo">
-            <div class="about-text">
-              <p>Nice to meet you. I'm Emily, an aspiring UX designer based in South Florida. Currently pursuing my Bachelor's in Information Technology at Indian River State College, I combine technical expertise with a passion for eye-catching, purposeful design.</p>
-              <p>My background in customer service and technical support has given me a unique perspective on user needs — I've helped 2,000+ customers navigate complex challenges, shaping an empathetic approach to every design problem.</p>
-              <p>I'm particularly interested in building digital tools for the fiber arts community, bringing together my love for crochet, knitting, and thoughtful UX.</p>
-              <div class="skills">
-                <span class="skill-pill">User Research</span>
-                <span class="skill-pill">Wireframing</span>
-                <span class="skill-pill">Prototyping</span>
-                <span class="skill-pill">Python</span>
-                <span class="skill-pill">Database Management</span>
-                <span class="skill-pill">Customer-Centric Design</span>
-                <span class="skill-pill">Problem Solving</span>
-              </div>
+      <div class="sec-head reveal">
+        <span class="counter-label">SELECTED WORK</span>
+      </div>
+
+      <h2 class="display-lg work-title reveal-clip">Featured projects</h2>
+
+      <div class="rows">
+        <article class="row reveal" tabindex="0" role="button" aria-label="StitchTracker App — case study coming soon" onclick="showPlaceholder()" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();showPlaceholder();}">
+          <div class="row-render render--1" aria-hidden="true"></div>
+          <div class="row-main">
+            <span class="row-index">001</span>
+            <h3 class="row-title">StitchTracker App</h3>
+            <span class="row-arrow" aria-hidden="true">→</span>
+          </div>
+          <div class="row-detail">
+            <p>A mobile app helping crochet and knitting enthusiasts track projects, manage yarn inventory, and discover new patterns — simplifying the creative process for makers of every skill level.</p>
+            <div class="row-tags">
+              <span class="tag">MOBILE DESIGN</span>
+              <span class="tag">USER RESEARCH</span>
+              <span class="tag">PROTOTYPING</span>
             </div>
           </div>
-        </div>
+        </article>
+
+        <article class="row reveal" tabindex="0" role="button" aria-label="Pattern Designer Tool — case study coming soon" onclick="showPlaceholder()" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();showPlaceholder();}">
+          <div class="row-render render--2" aria-hidden="true"></div>
+          <div class="row-main">
+            <span class="row-index">002</span>
+            <h3 class="row-title">Pattern Designer Tool</h3>
+            <span class="row-arrow" aria-hidden="true">→</span>
+          </div>
+          <div class="row-detail">
+            <p>An interactive web-based tool that lets fiber artists create, customize, and share crochet and knitting patterns — built around the real creative workflow of the maker community.</p>
+            <div class="row-tags">
+              <span class="tag">WEB DESIGN</span>
+              <span class="tag">UI/UX</span>
+              <span class="tag">INTERACTION DESIGN</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="row reveal" tabindex="0" role="button" aria-label="Yarn Color Palette Generator — case study coming soon" onclick="showPlaceholder()" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();showPlaceholder();}">
+          <div class="row-render render--3" aria-hidden="true"></div>
+          <div class="row-main">
+            <span class="row-index">003</span>
+            <h3 class="row-title">Yarn Color Palette Generator</h3>
+            <span class="row-arrow" aria-hidden="true">→</span>
+          </div>
+          <div class="row-detail">
+            <p>A digital tool that helps crafters visualize yarn color combinations before purchasing — using AI to suggest harmonious palettes from uploaded inspiration images.</p>
+            <div class="row-tags">
+              <span class="tag">VISUAL DESIGN</span>
+              <span class="tag">USER TESTING</span>
+              <span class="tag">ACCESSIBILITY</span>
+            </div>
+          </div>
+        </article>
       </div>
     </div>
   </section>
 
-  <!-- Projects — Dark Immersive Frame -->
-  <section id="projects" class="section section--dark">
+  <!-- ───────────── Contact ───────────── -->
+  <section id="contact" class="section contact">
     <div class="container">
-      <div class="projects-header">
-        <span class="label-text label-text--light">Work</span>
-        <h2 class="heading-display heading-display--light">Featured<br>Projects</h2>
+      <div class="sec-head reveal">
+        <span class="counter-label">CONTACT</span>
       </div>
-      <div class="projects-grid">
 
-        <div class="project-card" onclick="showPlaceholder()">
-          <div class="project-thumb">
-            <span class="project-icon">🧶</span>
-          </div>
-          <div class="project-tags">
-            <span class="tag">Mobile Design</span>
-            <span class="tag">User Research</span>
-            <span class="tag">Prototyping</span>
-          </div>
-          <h3 class="project-title">StitchTracker App</h3>
-          <p class="project-desc">A mobile app designed to help crochet and knitting enthusiasts track their projects, manage yarn inventory, and discover new patterns. Focused on simplifying the creative process for makers of all skill levels.</p>
-          <a href="javascript:void(0)" class="project-link">View Case Study →</a>
-        </div>
+      <h2 class="display-xl reveal-clip">Let's build<br>something <em class="serif-accent">beautiful.</em></h2>
+      <p class="contact-sub reveal">Open to new learning opportunities and collaborations. Reach out and let's create.</p>
 
-        <div class="project-card" onclick="showPlaceholder()">
-          <div class="project-thumb">
-            <span class="project-icon">📐</span>
-          </div>
-          <div class="project-tags">
-            <span class="tag">Web Design</span>
-            <span class="tag">UI/UX</span>
-            <span class="tag">Interaction Design</span>
-          </div>
-          <h3 class="project-title">Pattern Designer Tool</h3>
-          <p class="project-desc">An interactive web-based tool that allows fiber artists to create, customize, and share crochet and knitting patterns. Built around the creative workflow of the maker community.</p>
-          <a href="javascript:void(0)" class="project-link">View Case Study →</a>
-        </div>
-
-        <div class="project-card" onclick="showPlaceholder()">
-          <div class="project-thumb">
-            <span class="project-icon">🎨</span>
-          </div>
-          <div class="project-tags">
-            <span class="tag">Visual Design</span>
-            <span class="tag">User Testing</span>
-            <span class="tag">Accessibility</span>
-          </div>
-          <h3 class="project-title">Yarn Color Palette Generator</h3>
-          <p class="project-desc">A digital tool that helps crafters visualize yarn color combinations before purchasing. Uses AI to suggest harmonious color schemes based on uploaded inspiration images.</p>
-          <a href="javascript:void(0)" class="project-link">View Case Study →</a>
-        </div>
-
+      <div class="contact-links reveal">
+        <a href="mailto:emilynrios@icloud.com" class="contact-link">
+          <span class="cl-label">EMAIL</span>
+          <span class="cl-value">emilynrios@icloud.com</span>
+          <span class="cl-arrow" aria-hidden="true">→</span>
+        </a>
+        <a href="https://www.linkedin.com/in/emilynrios/" target="_blank" rel="noopener" class="contact-link">
+          <span class="cl-label">LINKEDIN</span>
+          <span class="cl-value">in/emilynrios</span>
+          <span class="cl-arrow" aria-hidden="true">→</span>
+        </a>
       </div>
     </div>
   </section>
+  </main>
 
-  <!-- Contact — White Editorial Section -->
-  <section id="contact" class="section section--light">
-    <div class="container">
-      <div class="contact-inner">
-        <span class="label-text">Contact</span>
-        <h2 class="heading-display">Let's<br>Connect</h2>
-        <p class="contact-sub">I'm always open to new learning opportunities and collaborations. Let's create something beautiful together.</p>
-        <div class="contact-links">
-          <a href="mailto:emilynrios@icloud.com" class="contact-link">Email</a>
-          <a href="https://www.linkedin.com/in/emilynrios/" target="_blank" rel="noopener" class="contact-link">LinkedIn</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer -->
+  <!-- ───────────── Footer ───────────── -->
   <footer class="footer">
     <div class="container footer-inner">
-      <span>© 2026 Emily Rios</span>
-      <span>South Florida</span>
+      <span>+ DESIGNED &amp; CODED WITH CARE <span class="heart" aria-hidden="true">✶</span></span>
+      <span>© 2026 EMILY RIOS</span>
     </div>
   </footer>
 
+  <script src="ascii.js"></script>
   <script>
     const nav = document.getElementById('nav');
+    const revealEls = document.querySelectorAll('.reveal, .reveal-clip, .reveal-img');
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.16, rootMargin: '0px 0px -8% 0px' });
+    revealEls.forEach((el) => io.observe(el));
+
+    let ticking = false;
+    function onScroll() {
+      nav.classList.toggle('scrolled', window.scrollY > 40);
+      ticking = false;
+    }
     window.addEventListener('scroll', () => {
-      nav.classList.toggle('scrolled', window.scrollY > 80);
+      if (!ticking) { requestAnimationFrame(onScroll); ticking = true; }
     }, { passive: true });
+    onScroll();
 
     function showPlaceholder() {
       alert('Case studies coming soon!');
