@@ -8,15 +8,21 @@
 (function () {
   const el = document.getElementById('sky');
   if (!el) return;
+<<<<<<< HEAD
   const trailEl = document.getElementById('trail');
+=======
+>>>>>>> 8d1f446c90f859d210281e6edca80c1cd2eb885e
 
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   // Brightness ramp for twinkling (blank → faint → bright).
   const RAMP = ' .·+*✦';
+<<<<<<< HEAD
   // Sparkle ramp for the cursor trail (faint → bright as it fades in/out).
   const SPARK = ' ·+*✦✷';
   let particles = []; // { x, y, life } in grid cells
+=======
+>>>>>>> 8d1f446c90f859d210281e6edca80c1cd2eb885e
 
   // Grapheme splitter so multi-codepoint / combining-mark cats stay intact.
   const seg = (typeof Intl !== 'undefined' && Intl.Segmenter)
@@ -165,6 +171,7 @@
       }
     }
     el.textContent = lines.join('\n');
+<<<<<<< HEAD
 
     // Cursor sparkle trail (separate pink layer).
     if (trailEl) {
@@ -195,6 +202,8 @@
       });
     }
     if (particles.length > 90) particles.splice(0, particles.length - 90);
+=======
+>>>>>>> 8d1f446c90f859d210281e6edca80c1cd2eb885e
   }
 
   // ── Lifecycle ──
@@ -209,6 +218,7 @@
 
   build();
 
+<<<<<<< HEAD
   // Cursor trail — map pointer position to a grid cell and spawn sparkles.
   if (!reduce && trailEl) {
     let lastSpawn = 0;
@@ -222,6 +232,8 @@
     }, { passive: true });
   }
 
+=======
+>>>>>>> 8d1f446c90f859d210281e6edca80c1cd2eb885e
   if (reduce) { frame(0); return; }
 
   let last = 0;
