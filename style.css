@@ -640,3 +640,19 @@ body {
   .row:hover .row-detail, .row:focus-visible .row-detail { max-height: 280px; }
   .footer-inner { flex-direction: column; align-items: flex-start; gap: 8px; }
 }
+
+/* Graceful degradation at very narrow widths (and skinny preview panels):
+   large display type can break as a last resort and never overflow/clip. */
+.hero-title, .display-xl, .display-lg, .row-title, .hero-serif {
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 420px) {
+  .hero-title { font-size: clamp(34px, 17vw, 64px); }
+  .display-xl { font-size: clamp(30px, 11vw, 48px); }
+  .display-lg { font-size: clamp(28px, 10vw, 40px); }
+  .row-title  { font-size: clamp(20px, 8vw, 32px); }
+  .hero-serif { font-size: clamp(18px, 6vw, 26px); }
+  .container, .nav-inner, .hero { padding-left: 18px; padding-right: 18px; }
+  .section { padding: 72px 0; }
+}
