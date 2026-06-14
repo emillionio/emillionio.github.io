@@ -80,6 +80,12 @@ body {
   user-select: none;
 }
 
+/* Pink sparkle trail that follows the cursor (drawn by ascii.js) */
+.trail {
+  color: var(--rose-deep);
+  text-shadow: 0 0 6px rgba(176, 61, 99, 0.35);
+}
+
 /* Subtle paper grain (SVG fractal noise, no external asset) */
 .paper-grain {
   position: fixed;
