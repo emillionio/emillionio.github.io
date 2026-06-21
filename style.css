@@ -145,6 +145,9 @@ body {
 }
 .nav-links a:hover { color: var(--ink); }
 
+.nav-links .nav-shop { color: var(--rose-deep); }
+.nav-links .nav-shop:hover { color: var(--rose-deeper); }
+
 .pill-cta {
   font-family: var(--mono);
   font-size: 12px;
@@ -472,6 +475,35 @@ body {
 }
 .row:hover .row-arrow,
 .row:focus-visible .row-arrow { color: var(--rose-deep); transform: translateX(10px); }
+
+/* "LIVE" pill on rows that link to a real, shipped tool */
+.row-tag-live {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  color: var(--rose-deep);
+  border: 1px solid var(--rose-deep);
+  border-radius: 999px;
+  padding: 3px 10px;
+  white-space: nowrap;
+  align-self: center;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.row-tag-live::before {
+  content: '';
+  width: 6px; height: 6px; border-radius: 50%;
+  background: #2e9d4f;                 /* green "live" dot */
+  box-shadow: 0 0 0 0 rgba(46,157,79,0.6);
+  animation: livePulse 2s infinite;
+}
+@keyframes livePulse {
+  0%   { box-shadow: 0 0 0 0 rgba(46,157,79,0.55); }
+  70%  { box-shadow: 0 0 0 6px rgba(46,157,79,0); }
+  100% { box-shadow: 0 0 0 0 rgba(46,157,79,0); }
+}
+@media (prefers-reduced-motion: reduce) { .row-tag-live::before { animation: none; } }
 
 .row-detail {
   position: relative;

@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:ital,wght@0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=5">
+  <link rel="stylesheet" href="style.css?v=6">
 </head>
 <body>
 
@@ -27,6 +27,8 @@
         <li><a href="#about">ABOUT</a></li>
         <li><a href="#work">WORK</a></li>
         <li><a href="#contact">CONTACT</a></li>
+        <!-- SHOP: swap href for your store URL when live, then delete the onclick. -->
+        <li><a href="#" class="nav-shop" onclick="event.preventDefault(); showShopSoon();">SHOP&nbsp;✦</a></li>
       </ul>
       <a href="#contact" class="pill-cta">LET'S TALK</a>
     </div>
@@ -122,11 +124,12 @@
           </div>
         </article>
 
-        <article class="row reveal" tabindex="0" role="button" aria-label="Pattern Designer Tool — case study coming soon" onclick="showPlaceholder()" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();showPlaceholder();}">
+        <article class="row reveal" tabindex="0" role="button" aria-label="Pattern Designer Tool — open the live tool in a new tab" onclick="openPatternDesigner()" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openPatternDesigner();}">
           <div class="row-render render--2" aria-hidden="true"></div>
           <div class="row-main">
             <span class="row-index">002</span>
             <h3 class="row-title">Pattern Designer Tool</h3>
+            <span class="row-tag-live">LIVE</span>
             <span class="row-arrow" aria-hidden="true">→</span>
           </div>
           <div class="row-detail">
@@ -193,7 +196,7 @@
     </div>
   </footer>
 
-  <script src="ascii.js?v=5"></script>
+  <script src="ascii.js?v=6"></script>
   <script>
     const nav = document.getElementById('nav');
     const revealEls = document.querySelectorAll('.reveal, .reveal-clip, .reveal-img');
@@ -219,6 +222,14 @@
 
     function showPlaceholder() {
       alert('Case studies coming soon!');
+    }
+
+    function openPatternDesigner() {
+      window.open('pattern-designer/', '_blank', 'noopener');
+    }
+
+    function showShopSoon() {
+      alert('Shop coming soon — elegant seaside crochet patterns. 🌊');
     }
   </script>
 

@@ -1,0 +1,18 @@
+{
+  "name": "Crochet Pattern Studio",
+  "short_name": "Crochet Studio",
+  "description": "Design visual crochet patterns with freeform drawing and a customizable stitch key.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#fbf7f1",
+  "theme_color": "#fbf7f1",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='96' fill='%23fbf7f1'/%3E%3Cg stroke='%234a3b34' stroke-width='14' stroke-linecap='round' fill='none'%3E%3Cline x1='256' y1='150' x2='256' y2='360'/%3E%3Cline x1='220' y1='150' x2='292' y2='150'/%3E%3Cline x1='225' y1='210' x2='287' y2='250'/%3E%3Cline x1='225' y1='270' x2='287' y2='310'/%3E%3C/g%3E%3C/svg%3E",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover, user-scalable=no" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="theme-color" content="#fbf7f1" />
+  <title>Crochet Pattern Studio</title>
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <div id="app">
+    <!-- ============ TOP TOOLBAR ============ -->
+    <header class="toolbar">
+      <div class="brand">Crochet Studio<small>PATTERN MAKER</small></div>
+
+      <div class="tool-group" id="toolGroup">
+        <button class="tool" data-tool="stamp" title="Place stitches (S)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 4v16M4 12h16"/></svg>
+          <span class="label">Stamp</span>
+        </button>
+        <button class="tool" data-tool="draw" title="Freeform draw (D)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 20s2-1 5-4 9-9 9-9l-1-1s-6 6-9 9-4 5-4 5z"/></svg>
+          <span class="label">Draw</span>
+        </button>
+        <button class="tool" data-tool="erase" title="Erase (E)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 16l7-7 8 8-3 3H8z"/><path d="M10 9l5-5 6 6-5 5"/></svg>
+          <span class="label">Erase</span>
+        </button>
+        <button class="tool" data-tool="select" title="Select &amp; transform (V)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 3l14 7-6 2-2 6z"/></svg>
+          <span class="label">Select</span>
+        </button>
+        <button class="tool" data-tool="pan" title="Pan (space/2-finger)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 11V5a1.5 1.5 0 013 0v5m0 0V4a1.5 1.5 0 013 0v6m0 0V6a1.5 1.5 0 013 0v7a6 6 0 01-6 6h-1a6 6 0 01-5-3l-2-4a1.5 1.5 0 012-2l2 2"/></svg>
+          <span class="label">Pan</span>
+        </button>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="tool-group swatches" id="swatches"></div>
+
+      <div class="divider"></div>
+
+      <div class="tool-group" id="sizes" title="Stitch / line size">
+        <button class="tool size-btn" data-size="22">S</button>
+        <button class="tool size-btn active" data-size="34">M</button>
+        <button class="tool size-btn" data-size="50">L</button>
+      </div>
+
+      <div class="spacer"></div>
+
+      <div class="tool-group">
+        <button class="tool" id="playBtn" title="Play timelapse (build the pattern from Begin to End)">▶</button>
+        <button class="tool" id="undo" title="Undo (⌘Z)">↶</button>
+        <button class="tool" id="redo" title="Redo">↷</button>
+        <button class="tool" id="zoomReset" title="Fit / reset zoom">100%</button>
+        <button class="tool" id="clearBtn" title="Clear all">Clear</button>
+        <button class="tool" id="exportBtn" title="Export PNG">⤓ Export</button>
+        <button class="tool" id="settingsBtn" title="Settings">⚙</button>
+      </div>
+    </header>
+
+    <!-- ============ SETTINGS POPOVER ============ -->
+    <div class="settings-pop" id="settingsPop" hidden>
+      <div class="settings-title">Placement</div>
+      <label class="setting-row" for="setLength">
+        <span class="setting-text">
+          <b>Stretch length on drag</b>
+          <small>Click-drag a new stitch to lengthen it (thickness stays the same). When off, drag sets the stitch's direction.</small>
+        </span>
+        <span class="switch"><input type="checkbox" id="setLength"><span class="track"></span></span>
+      </label>
+    </div>
+
+    <!-- ============ WORKSPACE ============ -->
+    <main class="workspace" id="workspace">
+      <canvas id="canvas"></canvas>
+
+      <!-- THE KEY -->
+      <aside class="panel" id="keyPanel">
+        <div class="panel-head">
+          <div class="panel-title">
+            <button class="tool" id="keyToggle" style="width:32px;height:32px;min-width:32px;padding:0;">☰</button>
+            <span>Stitch Key</span>
+          </div>
+        </div>
+        <div class="panel-body" id="keyBody">
+          <div class="section-label">Stitches</div>
+          <div id="stitchList"></div>
+          <div class="section-label">Markers</div>
+          <div id="markerList"></div>
+          <div class="section-label">My Icons</div>
+          <div id="customList"></div>
+          <button class="add-icon-btn" id="addIconBtn">＋ Draw my own icon</button>
+        </div>
+      </aside>
+
+      <!-- STEPS -->
+      <aside class="steps collapsed" id="stepsPanel">
+        <div class="panel-head">
+          <div class="panel-title">
+            <button class="tool" id="stepsToggle" style="width:32px;height:32px;min-width:32px;padding:0;">📝</button>
+            <span>Pattern Steps</span>
+          </div>
+        </div>
+        <div class="steps-body">
+          <label>Starting stitches</label>
+          <textarea id="startSteps" placeholder="e.g. Magic ring, ch 3 (counts as first dc), 11 dc into ring..."></textarea>
+          <label>Ending stitches</label>
+          <textarea id="endSteps" placeholder="e.g. sl st to first dc to join, fasten off, weave in ends."></textarea>
+        </div>
+      </aside>
+
+      <div class="hint" id="hint"></div>
+    </main>
+  </div>
+
+  <!-- ============ CUSTOM ICON MODAL ============ -->
+  <div class="modal-backdrop" id="iconModal">
+    <div class="modal">
+      <h2>Draw your own icon</h2>
+      <p>Sketch a symbol, give it a name, and it joins your key.</p>
+      <div class="icon-pad-wrap"><canvas id="iconPad" width="240" height="240"></canvas></div>
+      <div class="row">
+        <input type="text" id="iconLabel" placeholder="Label (e.g. Crossed Cable)" maxlength="28" />
+        <input type="text" id="iconAbbr" placeholder="Abbr" maxlength="8" style="max-width:90px;" />
+      </div>
+      <div class="row" style="justify-content:space-between;">
+        <button class="btn-ghost" id="iconClearPad" style="flex:0 0 auto;padding:0 16px;">Clear sketch</button>
+      </div>
+      <div class="btns">
+        <button class="btn-ghost" id="iconCancel">Cancel</button>
+        <button class="btn-primary" id="iconSave">Add to key</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/symbols.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,229 @@
+/* Crochet Pattern Studio — styles
+ * Warm, paper-like palette echoing the reference sheet (cream + cocoa + rose).
+ * Tuned for iPad: large touch targets, no text selection on the workspace,
+ * safe-area insets, and a layout that works in portrait or landscape.
+ */
+:root {
+  --cream: #fbf7f1;
+  --paper: #ffffff;
+  --ink: #4a3b34;          /* cocoa, default stitch ink */
+  --cocoa: #5b4a42;
+  --rose: #c98b94;
+  --rose-soft: #e9c9cd;
+  --line: #e7ddd2;
+  --shadow: rgba(74, 59, 52, 0.12);
+  --accent: #b6727e;
+  --font: -apple-system, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+  --serif: "Cochin", Georgia, "Times New Roman", serif;
+}
+
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+html, body {
+  margin: 0; height: 100%;
+  font-family: var(--font);
+  color: var(--ink);
+  background: var(--cream);
+  overscroll-behavior: none;
+}
+
+#app {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  grid-template-columns: 1fr;
+  height: 100vh;
+  height: 100dvh;
+}
+
+/* ---- top toolbar ------------------------------------------------------- */
+.toolbar {
+  display: flex; align-items: center; gap: 4px;
+  padding: 7px 10px;
+  padding-top: calc(7px + env(safe-area-inset-top));
+  background: var(--paper);
+  border-bottom: 1px solid var(--line);
+  box-shadow: 0 1px 6px var(--shadow);
+  z-index: 20;
+  /* one tidy row; scroll horizontally on narrow screens instead of stacking */
+  flex-wrap: nowrap; overflow-x: auto; overflow-y: hidden;
+  scrollbar-width: thin; -webkit-overflow-scrolling: touch;
+}
+.toolbar::-webkit-scrollbar { height: 0; }
+.brand {
+  font-family: var(--serif);
+  font-size: 17px; letter-spacing: 0.5px; line-height: 1.05;
+  color: var(--cocoa); margin-right: 6px; white-space: nowrap; flex: none;
+}
+.brand small { color: var(--rose); letter-spacing: 2px; font-size: 9px; display:block; margin-top:-1px;}
+
+.tool-group { display: flex; gap: 4px; align-items: center; flex: none; }
+.divider { width: 1px; height: 28px; background: var(--line); margin: 0 3px; flex: none; }
+
+button.tool, .swatch, .size-btn {
+  appearance: none; border: 1px solid var(--line); background: var(--cream);
+  color: var(--ink); border-radius: 11px;
+  min-width: 40px; height: 42px; padding: 0 9px;
+  font-size: 12px; font-weight: 600; white-space: nowrap; flex: none;
+  display: inline-flex; align-items: center; justify-content: center; gap: 5px;
+  cursor: pointer; transition: transform .05s, background .15s, border-color .15s;
+}
+button.tool:active { transform: scale(0.94); }
+button.tool.active { background: var(--rose-soft); border-color: var(--rose); color: var(--cocoa); }
+#playBtn { color: #2e9d4f; font-size: 15px; }
+#playBtn.active { background: #fbe2e0; border-color: #d6312b; color: #d6312b; }
+button.tool svg { width: 18px; height: 18px; flex: none; }
+
+/* tool buttons collapse to icon-only when the bar gets tight */
+@media (max-width: 1040px) {
+  #toolGroup button.tool .label { display: none; }
+  #toolGroup button.tool { min-width: 40px; padding: 0 7px; }
+  #sizes .size-btn { min-width: 36px; }
+}
+
+.spacer { flex: 1 1 auto; min-width: 6px; }
+
+/* color swatches */
+.swatches { display: flex; gap: 4px; flex: none; }
+.swatch { width: 26px; min-width: 26px; height: 26px; border-radius: 50%; padding: 0; }
+.swatch.active { box-shadow: 0 0 0 2px var(--paper), 0 0 0 4px var(--rose); }
+
+/* ---- settings popover -------------------------------------------------- */
+.settings-pop {
+  position: fixed; top: 62px; right: 12px; z-index: 60;
+  width: 300px; max-width: calc(100vw - 24px);
+  background: var(--paper); border: 1px solid var(--line); border-radius: 16px;
+  box-shadow: 0 12px 36px var(--shadow); padding: 14px;
+}
+.settings-pop[hidden] { display: none; }
+.settings-title { font-family: var(--serif); font-size: 16px; color: var(--cocoa); margin-bottom: 10px; }
+.setting-row { display: flex; align-items: center; gap: 12px; justify-content: space-between; cursor: pointer; }
+.setting-text b { display: block; font-size: 14px; color: var(--ink); }
+.setting-text small { display: block; font-size: 11px; color: var(--rose); margin-top: 3px; line-height: 1.35; }
+
+.switch { position: relative; width: 46px; height: 28px; flex: none; }
+.switch input { position: absolute; opacity: 0; width: 100%; height: 100%; margin: 0; cursor: pointer; }
+.switch .track { position: absolute; inset: 0; background: var(--line); border-radius: 14px; transition: background .2s; }
+.switch .track::after {
+  content: ''; position: absolute; top: 3px; left: 3px; width: 22px; height: 22px;
+  background: #fff; border-radius: 50%; box-shadow: 0 1px 3px rgba(0,0,0,.25); transition: transform .2s;
+}
+.switch input:checked + .track { background: var(--rose); }
+.switch input:checked + .track::after { transform: translateX(18px); }
+
+/* ---- main workspace ---------------------------------------------------- */
+.workspace { position: relative; overflow: hidden; touch-action: none; background: var(--cream); }
+#canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; touch-action: none; }
+
+/* floating side panel (the Key) */
+.panel {
+  position: absolute; top: 12px; left: 12px; bottom: 12px;
+  width: 230px;
+  background: rgba(255,255,255,0.96);
+  backdrop-filter: blur(6px);
+  border: 1px solid var(--line); border-radius: 18px;
+  box-shadow: 0 8px 28px var(--shadow);
+  display: flex; flex-direction: column; overflow: hidden;
+  z-index: 10;
+}
+.panel.collapsed { width: 52px; }
+.panel.collapsed .panel-body, .panel.collapsed .panel-title span { display: none; }
+
+.panel-head {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 12px 14px; border-bottom: 1px solid var(--line);
+}
+.panel-title { font-family: var(--serif); font-size: 17px; color: var(--cocoa); display:flex; align-items:center; gap:8px;}
+.panel-body { overflow-y: auto; padding: 8px; -webkit-overflow-scrolling: touch; }
+
+.key-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 6px 8px; border-radius: 12px; cursor: pointer;
+  border: 1px solid transparent;
+}
+.key-item:active { background: var(--cream); }
+.key-item.active { background: var(--rose-soft); border-color: var(--rose); }
+.key-item canvas { width: 34px; height: 34px; flex: none; }
+.key-item .labels { display: flex; flex-direction: column; line-height: 1.15; min-width: 0; }
+.key-item .labels b { font-size: 13px; font-weight: 600; color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
+.key-item .labels span { font-size: 11px; color: var(--rose); }
+.key-item .del { margin-left:auto; opacity:0; border:none; background:none; color:var(--rose); font-size:18px; cursor:pointer; padding:2px 6px;}
+.key-item:hover .del { opacity:1; }
+
+.section-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--rose); padding: 10px 8px 4px; }
+
+.add-icon-btn {
+  margin: 8px; width: calc(100% - 16px);
+  border: 1.5px dashed var(--rose); background: transparent; color: var(--accent);
+  border-radius: 12px; height: 42px; font-weight: 600; cursor: pointer;
+}
+.add-icon-btn:active { background: var(--cream); }
+
+/* steps panel (bottom-right) */
+.steps {
+  position: absolute; right: 12px; bottom: 12px; width: 260px;
+  max-height: 46%;
+  background: rgba(255,255,255,0.96); backdrop-filter: blur(6px);
+  border: 1px solid var(--line); border-radius: 18px;
+  box-shadow: 0 8px 28px var(--shadow);
+  display: flex; flex-direction: column; overflow: hidden; z-index: 10;
+}
+.steps.collapsed { height: 48px; }
+.steps.collapsed .steps-body { display: none; }
+.steps-body { padding: 10px 12px; overflow-y: auto; }
+.steps-body label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--rose); display:block; margin: 6px 0 3px;}
+.steps-body textarea {
+  width: 100%; border: 1px solid var(--line); border-radius: 10px;
+  background: var(--cream); color: var(--ink); font-family: var(--font);
+  font-size: 13px; padding: 8px; resize: vertical; min-height: 52px;
+}
+
+.hint {
+  position: absolute; bottom: 14px; left: 50%; transform: translateX(-50%);
+  background: var(--cocoa); color: #fff; font-size: 12px; padding: 8px 14px;
+  border-radius: 20px; opacity: 0; transition: opacity .25s; pointer-events: none;
+  z-index: 30; white-space: nowrap;
+}
+.hint.show { opacity: 0.92; }
+
+/* ---- modal (custom icon creator) -------------------------------------- */
+.modal-backdrop {
+  position: fixed; inset: 0; background: rgba(74,59,52,0.45);
+  display: none; align-items: center; justify-content: center; z-index: 100;
+}
+.modal-backdrop.show { display: flex; }
+.modal {
+  background: var(--paper); border-radius: 20px; padding: 20px;
+  width: min(420px, 92vw); box-shadow: 0 20px 60px rgba(0,0,0,.3);
+}
+.modal h2 { font-family: var(--serif); margin: 0 0 4px; color: var(--cocoa); }
+.modal p { margin: 0 0 14px; font-size: 13px; color: var(--rose); }
+.icon-pad-wrap { display:flex; justify-content:center; }
+#iconPad {
+  width: 240px; height: 240px; background: var(--cream);
+  border: 1px solid var(--line); border-radius: 16px; touch-action: none;
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 30px 30px;
+}
+.modal .row { display: flex; gap: 10px; align-items: center; margin-top: 14px; }
+.modal input[type=text] {
+  flex: 1; border: 1px solid var(--line); border-radius: 10px;
+  padding: 10px; font-size: 14px; font-family: var(--font); color: var(--ink);
+  background: var(--cream);
+}
+.modal .btns { display: flex; gap: 10px; margin-top: 16px; }
+.btn-primary, .btn-ghost {
+  flex: 1; height: 46px; border-radius: 12px; font-weight: 600; font-size: 15px;
+  cursor: pointer; border: 1px solid var(--line);
+}
+.btn-primary { background: var(--rose); color: #fff; border-color: var(--rose); }
+.btn-ghost { background: var(--cream); color: var(--ink); }
+.btn-primary:active, .btn-ghost:active { transform: scale(0.97); }
+
+/* responsive: stack panels narrower on small/portrait screens */
+@media (max-width: 720px) {
+  .panel { width: 180px; }
+  .steps { width: 200px; }
+  .brand small { display:none; }
+}
