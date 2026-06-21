@@ -110,6 +110,13 @@ button.tool svg { width: 18px; height: 18px; flex: none; }
 .switch input:checked + .track { background: var(--rose); }
 .switch input:checked + .track::after { transform: translateX(18px); }
 
+.setting-divider { height: 1px; background: var(--line); margin: 14px 0; }
+.setting-text em { font-style: normal; color: var(--accent); font-family: var(--mono, var(--font)); }
+.setting-slider {
+  width: 100%; margin-top: 10px; accent-color: var(--rose);
+  height: 24px; cursor: pointer;
+}
+
 /* ---- main workspace ---------------------------------------------------- */
 .workspace { position: relative; overflow: hidden; touch-action: none; background: var(--cream); }
 #canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; touch-action: none; }

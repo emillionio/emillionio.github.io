@@ -45,10 +45,14 @@
     customSymbols: [],
     startSteps: '',
     endSteps: '',
-    settings: { lengthOnDrag: false }   // placement-drag: false = set direction, true = stretch length
+    settings: {
+      lengthOnDrag: false,   // placement-drag: false = set direction, true = stretch length
+      brushSpacing: 1.1      // Stitch Brush: gap between stamps, as a multiple of stitch size
+    }
   };
 
   var history = [], future = [];
+  var brush = null;          // active Stitch Brush stroke accumulator
   var playback = { active: false, order: [], pos: {}, startTime: 0, perStitch: 300, raf: 0 };
   var dpr = Math.max(1, window.devicePixelRatio || 1);
   var nextId = 1;
@@ -462,10 +466,27 @@
       render(); return;
     }
 
+    if (state.tool === 'brush') {
+      // Stitch Brush: drag to lay down evenly-spaced stitches like a Procreate
+      // stamp brush. Each one is its own object, so Select can separate them.
+      pushHistory();
+      state.objects.push(makeBrushStamp(w));
+      brush = { last: { x: w.x, y: w.y }, dAccum: 0 };
+      state.selectedId = null;
+      active = { mode: 'brush' };
+      render(); return;
+    }
+
     if (state.tool === 'select') {
       handleSelectDown(pos, w, false);
       render(); return;
     }
+  }
+
+  function makeBrushStamp(p) {
+    var sym = CrochetSymbols.byId(state.activeSymbolId);
+    var col = (sym && sym.color) ? sym.color : state.color;
+    return { id: uid(), type: 'stamp', symbolId: state.activeSymbolId, x: p.x, y: p.y, size: state.size, sx: 1, sy: 1, rot: 0, color: col };
   }
 
   // Shared select/transform entry for both Select and Stamp tools.
@@ -511,6 +532,23 @@
       render(); return;
     }
     if (active.mode === 'erase') { var hit = hitTest(w.x, w.y); if (hit) { removeObject(hit.id); render(); } return; }
+    if (active.mode === 'brush') {
+      // place a stitch every `spacing` world-units along the drag path
+      var spacing = Math.max(6, state.size * state.settings.brushSpacing);
+      var lp = brush.last, dx = w.x - lp.x, dy = w.y - lp.y, segLen = Math.hypot(dx, dy);
+      if (segLen > 0) {
+        var ux = dx / segLen, uy = dy / segLen, traveled = 0, remaining = spacing - brush.dAccum;
+        while (traveled + remaining <= segLen) {
+          traveled += remaining;
+          state.objects.push(makeBrushStamp({ x: lp.x + ux * traveled, y: lp.y + uy * traveled }));
+          brush.dAccum = 0; remaining = spacing;
+        }
+        brush.dAccum += (segLen - traveled);
+        brush.last = { x: w.x, y: w.y };
+        render();
+      }
+      return;
+    }
     if (active.mode === 'place') {
       // dragging while first placing a stitch: default sets DIRECTION; with the
       // length setting on, it stretches the stitch out from the click point.
@@ -540,8 +578,8 @@
 
   function pointerUp() {
     if (active && active.mode === 'draw') clearTimeout(active.holdTimer);
-    if (active && /draw|move|erase|transform|place|rotate/.test(active.mode)) save();
-    active = null;
+    if (active && /draw|move|erase|transform|place|rotate|brush/.test(active.mode)) save();
+    active = null; brush = null;
   }
 
   // ---- draw-and-hold snap
@@ -701,10 +739,11 @@
       state.objects = d.objects || []; state.customSymbols = d.customSymbols || [];
       state.startSteps = d.startSteps || ''; state.endSteps = d.endSteps || '';
       if (d.view) state.view = d.view;
-      if (d.settings) state.settings = d.settings;
+      if (d.settings) state.settings = Object.assign({ lengthOnDrag: false, brushSpacing: 1.1 }, d.settings);
       document.getElementById('startSteps').value = state.startSteps;
       document.getElementById('endSteps').value = state.endSteps;
       var sl = document.getElementById('setLength'); if (sl) sl.checked = !!state.settings.lengthOnDrag;
+      reflectSpacing();
     } catch (err) {}
   }
 
@@ -809,6 +848,12 @@
 
   // ----------------------------------------------------------------- UI wiring
   function reflectTool() { document.querySelectorAll('#toolGroup .tool').forEach(function (b) { b.classList.toggle('active', b.dataset.tool === state.tool); }); }
+  function reflectSpacing() {
+    var ss = document.getElementById('setSpacing'), sv = document.getElementById('spacingVal');
+    var v = state.settings.brushSpacing || 1.1;
+    if (ss) ss.value = v;
+    if (sv) sv.textContent = (+v).toFixed(1) + '×';
+  }
   function flash(msg) { var h = document.getElementById('hint'); h.textContent = msg; h.classList.add('show'); clearTimeout(flash._t); flash._t = setTimeout(function () { h.classList.remove('show'); }, 1800); }
   function buildSwatches() {
     var wrap = document.getElementById('swatches');
@@ -838,6 +883,9 @@
     var setLength = document.getElementById('setLength');
     setLength.checked = !!state.settings.lengthOnDrag;
     setLength.addEventListener('change', function () { state.settings.lengthOnDrag = this.checked; save(); flash(this.checked ? 'Drag a new stitch to stretch its length' : 'Drag a new stitch to set its direction'); });
+    var setSpacing = document.getElementById('setSpacing');
+    if (setSpacing) setSpacing.addEventListener('input', function () { state.settings.brushSpacing = +this.value; reflectSpacing(); save(); });
+    reflectSpacing();
 
     document.getElementById('keyToggle').addEventListener('click', function () { document.getElementById('keyPanel').classList.toggle('collapsed'); });
     document.getElementById('stepsToggle').addEventListener('click', function () { document.getElementById('stepsPanel').classList.toggle('collapsed'); });
@@ -847,7 +895,7 @@
     window.addEventListener('keydown', function (e) {
       if (e.target.tagName === 'TEXTAREA' || e.target.tagName === 'INPUT') return;
       if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'z') { e.preventDefault(); e.shiftKey ? redo() : undo(); return; }
-      var map = { s: 'stamp', d: 'draw', e: 'erase', v: 'select', h: 'pan' };
+      var map = { s: 'stamp', b: 'brush', d: 'draw', e: 'erase', v: 'select', h: 'pan' };
       if (map[e.key]) { state.tool = map[e.key]; if (state.tool !== 'select' && state.tool !== 'stamp') state.selectedId = null; reflectTool(); render(); }
       if ((e.key === 'Delete' || e.key === 'Backspace') && state.selectedId) { pushHistory(); removeObject(state.selectedId); render(); save(); }
     });

@@ -26,6 +26,11 @@ recommended so localStorage autosave works reliably.
   All symbols from the "Crochet Symbols for Beginners" sheet are included (ch, sc, hdc,
   dc, tr, dtr, trtr, htr, puff, popcorn, bobble, cluster, shell, V/W, posts, inc/dec,
   magic ring, etc.).
+- **Stitch Brush** (the dotted-path icon, shortcut **B**): pick a stitch, then *drag* across
+  the canvas to paint a whole row of that stitch at once — like a stamp brush in Procreate.
+  Works with pen, finger, or mouse. Every stitch is its own object, so the **Select** tool
+  can grab and separate any individual one. Adjust the gap between them with **Brush spacing**
+  in ⚙ Settings (higher = more spread out).
 - **Draw** freeform lines and shapes with the pen. **Draw-and-hold to snap:** sketch a
   rough shape and then *hold still* (pencil/finger down) for about half a second — it
   conforms to a clean **line, ellipse/circle, rectangle/square, or triangle**, just like
